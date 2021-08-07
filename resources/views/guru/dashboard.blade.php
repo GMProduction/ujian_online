@@ -1,4 +1,4 @@
-@extends('admin.base')
+@extends('guru.base')
 @section('title')
 Dashboard
 @endsection
@@ -42,7 +42,7 @@ Dashboard
 
                 </thead>
                 <tbody>
-                @forelse($data as $key => $d)
+                @forelse($paket as $key => $d)
                     <tr>
                         <td>{{$key + 1}}</td>
                         <td><img src="{{$d->url_gambar}}" height="75px"></td>
@@ -51,24 +51,65 @@ Dashboard
                         <td>{{$d->waktu_pengerjaan}}</td>
                         <td>{{date('d F Y', strtotime($d->tanggal_mulai))}}</td>
                         <td>{{date('d F Y', strtotime($d->tanggal_selesai))}}</td>
-                        <td><a class="btn btn-sm btn-success" data-id="{{$d->id}}" href="{{route('nilai_paket',['id' => $d->id])}}">Detail</a>
-                            </td>
+                        <td><a class="btn btn-sm btn-success" data-id="{{$d->id}}" href="{{route('nilai_paket_guru',['id' => $d->id])}}">Detail</a>
+                        </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="8" class="text-center">Tidak ada paket soal</td>
+                        <td colspan="8" class="text-center">Tidak ada paket pakt</td>
                     </tr>
                 @endforelse
                 </tbody>
 
             </table>
-            <div class="d-flex justify-content-end">
-                {{$data->links()}}
-            </div>
+
             </div>
 
+        <div class="table-container">
 
+        <h5 class="mb-3">Nilai Siswa</h5>
 
+            <table class="table table-striped table-bordered ">
+                <thead>
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        Nama Siswa
+                    </th>
+                    <th>
+                        Kelas
+                    </th>
+                    <th>
+                        Paket Soal
+                    </th>
+                    <th>
+                        Nilai
+                    </th>
+                </tr>
+
+                </thead>
+                <tbody>
+                @forelse($nilai as $key => $d)
+                    <tr>
+                        <td>{{ $key + 1}}</td>
+                        <td>{{$d->getUser->getSiswa->nama}}</td>
+                        <td>{{$d->getUser->getSiswa->kelas}}</td>
+                        <td>{{$d->getPaket->nama_paket}}</td>
+                        <td>{{$d->nilai}}</td>
+
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="7" class="text-center">Tidak siswa yang mengerjakan</td>
+                    </tr>
+                @endforelse
+                </tbody>
+
+            </table>
+
+        </div>
     </section>
 
 

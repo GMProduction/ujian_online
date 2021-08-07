@@ -5,6 +5,10 @@ use App\Http\Controllers\Admin\GuruController;
 use App\Http\Controllers\Admin\NilaiController;
 use App\Http\Controllers\Admin\SiswaController;
 use App\Http\Controllers\Admin\SoalController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Guru\NilaiGuruController;
+use App\Http\Controllers\Guru\ProfileGuruController;
+use App\Http\Controllers\Guru\SoalGuruController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,17 +29,47 @@ Route::get(
     }
 );
 
+Route::get(
+    '/login',
+    function () {
+        return view('login');
+    }
+);
+
+Route::post('/login',[AuthController::class,'loginAdmin']);
+Route::get('/logout',[AuthController::class,'logoutAdmin']);
 Route::prefix('/admin')->group(
     function () {
         Route::get('/', [DashboardController::class, 'index']);
-        Route::match(['post', 'get'],'/paket-soal', [SoalController::class, 'paketAll'])->name('paket');
+        Route::post('/register', [AuthController::class, 'register']);
+
+        Route::match(['post', 'get'], '/paket-soal', [SoalController::class, 'paketAll'])->name('paket');
         Route::get('/paket-soal/{id}', [SoalController::class, 'paketSoal'])->name('paket_soal');
         Route::match(['post', 'get'], '/paket-soal/{id}/soal', [SoalController::class, 'soal'])->name('detail_soal');
         Route::get('/paket-soal/{id}/soal/detail', [SoalController::class, 'getDetailSoal'])->name('detail_soal_jawaban');
+        Route::get('/paket-soal/delete/{id}', [SoalController::class, 'deletePaket'])->name('delete_paket_guru');
+        Route::get('/paket-soal/soal/delete/{id}', [SoalController::class, 'soal'])->name('detail_soal_guru');
 
         Route::get('/guru', [GuruController::class, 'index']);
         Route::get('/siswa', [SiswaController::class, 'index']);
         Route::get('/nilai', [NilaiController::class, 'index']);
-}
+        Route::get('/nilai/{id}', [NilaiController::class, 'detail'])->name('nilai_paket');
+    }
+);
+
+Route::prefix('/guru')->group(
+    function () {
+        Route::get('/', [\App\Http\Controllers\Guru\DashboardController::class, 'index']);
+        Route::get('/profile', [ProfileGuruController::class, 'index']);
+
+        Route::match(['post', 'get'], '/paket-soal', [SoalGuruController::class, 'paketAll'])->name('paket_guru');
+        Route::get('/paket-soal/{id}', [SoalGuruController::class, 'paketSoal'])->name('paket_soal_guru');
+        Route::get('/paket-soal/delete/{id}', [SoalGuruController::class, 'deletePaket'])->name('delete_paket_guru');
+        Route::match(['post', 'get'], '/paket-soal/{id}/soal', [SoalGuruController::class, 'soal'])->name('detail_soal_guru');
+        Route::get('/paket-soal/soal/delete/{id}', [SoalGuruController::class, 'soal'])->name('detail_soal_guru');
+        Route::get('/paket-soal/{id}/soal/detail', [SoalGuruController::class, 'getDetailSoal'])->name('detail_soal_jawaban_guru');
+        Route::get('/nilai', [NilaiGuruController::class, 'index']);
+        Route::get('/nilai/{id}', [NilaiGuruController::class, 'detail'])->name('nilai_paket_guru');
+    }
 );
 

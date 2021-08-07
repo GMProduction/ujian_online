@@ -46,4 +46,12 @@ class User extends Authenticatable
     public function getSiswa(){
         return $this->hasOne(Siswa::class, 'id_user');
     }
+
+    public function getGuru(){
+        return $this->hasOne(Guru::class, 'id_user');
+    }
+
+    public function scopeRole($query,$role){
+        return $query->where('roles','=',$role);
+    }
 }

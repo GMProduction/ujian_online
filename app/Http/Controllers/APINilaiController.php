@@ -23,7 +23,7 @@ class APINilaiController extends Controller
             'soal' => $totalSoal,
             'benar' => $benar,
             'salah' => $salah,
-            'tidak dikerjakan' => $tidakDijawab
+            'tidak_dikerjakan' => $tidakDijawab
         ];
         return $data;
     }

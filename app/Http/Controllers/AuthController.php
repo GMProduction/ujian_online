@@ -40,7 +40,7 @@ class AuthController extends CustomController
                     'username' => $r->get('username'),
                 ]
             );
-            if (strpos($r->get('password'), '*') !== false) {
+            if (strpos($r->get('password'), '*') === false) {
                 $user->update(
                     [
                         'password' => Hash::make($field['password']),
@@ -165,8 +165,9 @@ class AuthController extends CustomController
                 if (strpos($uri, 'api')) {
                     return response()->json(
                         [
-                            'msg'    => 'Login gagal',
-                        ],401
+                            'msg' => 'Login gagal',
+                        ],
+                        401
                     );
                 } else {
                     $data = [
@@ -238,7 +239,11 @@ class AuthController extends CustomController
                 'password' => $request['password'],
             ];
             if ($this->isAuth($credentials)) {
-                $redirect = '/admin';
+                if (Auth::user()->roles == 'admin') {
+                    $redirect = '/admin';
+                }elseif (Auth::user()->roles == 'guru') {
+                    $redirect = '/guru';
+                }
 
                 return redirect($redirect);
             }

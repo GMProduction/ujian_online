@@ -1,4 +1,4 @@
-@extends('admin.base')
+@extends('guru.base')
 @section('title')
     Dashboard
 @endsection
@@ -33,7 +33,7 @@
 
                 </thead>
                 <tbody>
-                @forelse($data->soal as $key => $d)
+                @forelse($data->getSoal as $key => $d)
                     <tr>
                         <td style="width: 50px">{{$key + 1}}</td>
                         <td>{!! $d->soal !!}</td>
@@ -50,9 +50,8 @@
                 </tbody>
 
             </table>
-            <div class="d-flex justify-content-end">
-                {{$data->soal->links()}}
-            </div>
+
+
         </div>
 
 
@@ -66,13 +65,9 @@
 
     <script>
         $(document).on('click', '#edit', function () {
-            var url = window.location.pathname;
-            console.log()
+            var url = window.location.href;
             var id = $(this).data('id');
-            var page = '{{request('page') ? '&page='.request('page') : ''}}';
-            url = url + '/soal?q=' + id+''+page;
-            url = url.replace('amp;','');
-
+            url = url + '/soal?q=' + id;
             $(this).attr('href', url);
         })
 
@@ -85,7 +80,7 @@
         $(document).on('click','#deleteData', function () {
             var nama = $(this).data('nama');
             var id = $(this).data('id');
-            deleteData(nama, '/admin/paket-soal/soal/delete/'+id);
+            deleteData(nama, '/guru/paket-soal/soal/delete/'+id);
         })
     </script>
 

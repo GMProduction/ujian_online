@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Guru;
 
+use App\Helper\CustomController;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Guru;
@@ -12,14 +13,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 
-class NilaiController extends Controller
+class NilaiGuruController extends CustomController
 {
     //
     public function index()
     {
-        $paket = Paket::paginate(10);
+        $paket = Paket::where('id_user','=',Auth::id())->paginate(10);
 
-        return view('admin.nilai')->with(['data' => $paket]);
+        return view('guru.nilai')->with(['data' => $paket]);
     }
 
     public function detail($id)
@@ -56,6 +57,6 @@ class NilaiController extends Controller
             }
         }
 //        return $nilai;
-        return view('admin.nilai-detail')->with(['data' => $nilai]);
+        return view('guru.nilai-detail')->with(['data' => $nilai]);
     }
 }

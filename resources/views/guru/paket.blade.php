@@ -1,4 +1,4 @@
-@extends('admin.base')
+@extends('guru.base')
 @section('title')
     Dashboard
 @endsection
@@ -59,10 +59,10 @@
                         <td>{{$d->waktu_pengerjaan}}</td>
                         <td>{{date('d F Y', strtotime($d->tanggal_mulai))}}</td>
                         <td>{{date('d F Y', strtotime($d->tanggal_selesai))}}</td>
-                        <td><a class="btn btn-sm btn-success" data-id="{{$d->id}}" href="{{route('paket_soal',['id' => $d->id])}}">Detail</a>
+                        <td><a class="btn btn-sm btn-success" data-id="{{$d->id}}" href="{{route('paket_soal_guru',['id' => $d->id])}}">Detail</a>
                             <a class="btn btn-sm btn-primary" data-id="{{$d->id}}" data-nama="{{$d->nama_paket}}" data-mapel="{{$d->mapel}}" data-waktu="{{$d->waktu_pengerjaan}}"
                                data-mulai="{{$d->tanggal_mulai}}" data-selesai="{{$d->tanggal_selesai}}" data-img="{{$d->url_gambar}}" data-pengaturan="{{$d->pengaturan}}" id="editData">Edit</a>
-                            <a class="btn btn-sm btn-danger">Delete</a></td>
+                            <a class="btn btn-sm btn-danger" id="deleteData" data-nama="{{$d->nama_paket}}" data-id="{{$d->id}}" >Delete</a></td>
                     </tr>
                 @empty
                     <tr>
@@ -72,9 +72,6 @@
                 </tbody>
 
             </table>
-            <div class="d-flex justify-content-end">
-                {{$data->links()}}
-            </div>
 
         </div>
         <div class="modal  fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
@@ -203,7 +200,7 @@
         $(document).on('click','#deleteData', function () {
             var nama = $(this).data('nama');
             var id = $(this).data('id');
-            deleteData(nama, '/admin/paket-soal/delete/'+id);
+            deleteData(nama, '/guru/paket-soal/delete/'+id);
         })
     </script>
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Guru;
 
 use App\Helper\CustomController;
 use App\Http\Controllers\Controller;
@@ -10,11 +10,11 @@ use App\Models\Soal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
-use function PHPUnit\Framework\isReadable;
 
-class SoalController extends CustomController
+class SoalGuruController extends CustomController
 {
     //
+
     public function paketAll()
     {
         if ($this->request->isMethod('POST')) {
@@ -52,9 +52,9 @@ class SoalController extends CustomController
                 'msg' => 'berhasil'
             ],200);
         }
-        $paket = Paket::paginate(10);
+        $paket = Paket::where('id_user','=',Auth::id())->paginate(10);
 //return $paket;
-        return view('admin.paket')->with(['data' => $paket]);
+        return view('guru.paket')->with(['data' => $paket]);
     }
 
     public function paketSoal($id)
@@ -63,7 +63,7 @@ class SoalController extends CustomController
         $soal = $paket->getSoal()->paginate(10);
 
         $paket = Arr::add($paket,'soal',$soal);
-        return view('admin.paket-soal')->with(['data' => $paket]);
+        return view('guru.paket-soal')->with(['data' => $paket]);
     }
 
     public function soal($id)
@@ -108,7 +108,7 @@ class SoalController extends CustomController
             }
         }
 
-        return view('admin.paket-soal-jawaban');
+        return view('guru.paket-soal-jawaban');
     }
 
     public function getDetailSoal($id)

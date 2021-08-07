@@ -1,4 +1,4 @@
-@extends('admin.base')
+@extends('guru.base')
 @section('title')
 Dashboard
 @endsection
@@ -51,7 +51,7 @@ Dashboard
                         <td>{{$d->waktu_pengerjaan}}</td>
                         <td>{{date('d F Y', strtotime($d->tanggal_mulai))}}</td>
                         <td>{{date('d F Y', strtotime($d->tanggal_selesai))}}</td>
-                        <td><a class="btn btn-sm btn-success" data-id="{{$d->id}}" href="{{route('nilai_paket',['id' => $d->id])}}">Detail</a>
+                        <td><a class="btn btn-sm btn-success" data-id="{{$d->id}}" href="{{route('nilai_paket_guru',['id' => $d->id])}}">Detail</a>
                             </td>
                     </tr>
                 @empty

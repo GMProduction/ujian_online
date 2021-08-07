@@ -24,4 +24,15 @@ class Nilai extends Model
     public function getUser(){
         return $this->belongsTo(User::class, 'id_siswa')->select(['id','username']);
     }
+
+    public function getPaket(){
+        return $this->belongsTo(Paket::class,'id_paket');
+
+    }
+
+    public static function setNilai(){
+        return Nilai::orderBy('nilai','DESC')->groupBy('id_siswa')->select(['id_siswa','id_paket'])->selectRaw('sum(nilai) as nilai');
+    }
+
+
 }

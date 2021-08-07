@@ -1,4 +1,4 @@
-@extends('admin.base')
+@extends('guru.base')
 @section('title')
     Dashboard
 @endsection
@@ -25,7 +25,7 @@
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
-                                    <input type="radio" name="jawaban_benar"  value="0"  id="jawaban_benar0" aria-label="Radio button for following text input">
+                                    <input type="radio" name="jawaban_benar" value="0" id="jawaban_benar0" aria-label="Radio button for following text input">
                                 </div>
                             </div>
                             <input id="id_jawaban0" name="id_jawaban[]" hidden>
@@ -36,7 +36,7 @@
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
-                                    <input type="radio" name="jawaban_benar"  value="1" id="jawaban_benar1" aria-label="Radio button for following text input">
+                                    <input type="radio" name="jawaban_benar" value="1" id="jawaban_benar1" aria-label="Radio button for following text input">
                                 </div>
                             </div>
                             <input id="id_jawaban1" name="id_jawaban[]" hidden>
@@ -47,7 +47,7 @@
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
-                                    <input type="radio" name="jawaban_benar"  value="2" id="jawaban_benar2" aria-label="Radio button for following text input">
+                                    <input type="radio" name="jawaban_benar" value="2" id="jawaban_benar2" aria-label="Radio button for following text input">
                                 </div>
                             </div>
                             <input id="id_jawaban2" name="id_jawaban[]" hidden>
@@ -58,7 +58,7 @@
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
-                                    <input type="radio" name="jawaban_benar"  value="3" id="jawaban_benar3"  aria-label="Radio button for following text input">
+                                    <input type="radio" name="jawaban_benar" value="3" id="jawaban_benar3" aria-label="Radio button for following text input">
                                 </div>
                             </div>
                             <input id="id_jawaban3" name="id_jawaban[]" hidden>
@@ -68,7 +68,7 @@
                 </div>
                 <div class="row mt-4">
                     <div class="col m-2">
-                        <a  class="btn btn-primary w-100" id="kembali">Kembali</a>
+                        <a class="btn btn-primary w-100" id="kembali">Kembali</a>
                     </div>
                     <div class="col m-2">
                         <button type="submit" class="btn btn-success w-100">Simpan</button>
@@ -91,7 +91,7 @@
             $("#soal").summernote();
                 {{--            $.each('{{}}')--}}
             var q = getParameter('q');
-            $('#jawaban_benar0').attr('checked','')
+            $('#jawaban_benar0').attr('checked', '')
             if (q) {
                 getData(q);
             }
@@ -102,9 +102,9 @@
         $(document).on('click', '#kembali', function () {
             var url = window.location.pathname;
             var page = '{{request('page') ? '?page='.request('page') : ''}}';
-            url = url+page;
-            url = url.replace('/soal','')
-            $(this).attr('href',url);
+            url = url + page;
+            url = url.replace('/soal', '')
+            $(this).attr('href', url);
         })
 
         function getParameter(a) {
@@ -121,11 +121,11 @@
                 $("#soal").summernote("code", data['soal']);
                 $('#formSoal #id').val(data['id'])
                 $.each(data['get_jawaban_all'], function (key, value) {
-                    $('#jawaban'+key).val(value['jawaban'])
-                    $('#id_jawaban'+key).val(value['id'])
-                    $('#jawaban_benar'+key).val(value['id'])
-                    if(value['jawaban_benar'] === 1){
-                        $('#jawaban_benar'+key).attr('checked','')
+                    $('#jawaban' + key).val(value['jawaban'])
+                    $('#id_jawaban' + key).val(value['id'])
+                    $('#jawaban_benar' + key).val(value['id'])
+                    if (value['jawaban_benar'] === 1) {
+                        $('#jawaban_benar' + key).attr('checked', '')
                     }
                 })
             })

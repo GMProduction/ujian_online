@@ -37,14 +37,14 @@
 
 
 
-            <a href="/admin">
+            <a href="/guru">
                 <li href="#" class="nav-link t-white">
                     <i class="bx bxs-dashboard"></i>
                     <span class="mx-2">Dashboard</span>
                 </li>
             </a>
 
-            <a href="/admin/paket-soal">
+            <a href="/guru/paket-soal">
                 <li href="#" class="nav-link t-white">
                     <i class="bx bxs-cube"></i>
                     <span class="mx-2">Master Soal</span>
@@ -52,30 +52,22 @@
             </a>
 
 
-            <a href="/admin/guru">
+            <a href="/guru/profile">
                 <li href="#" class="nav-link t-white">
                     <i class="bx bxs-group"></i>
-                    <span class="mx-2">Data Guru</span>
+                    <span class="mx-2">Profile</span>
                 </li>
 
             </a>
-
-
-            <a href="/admin/siswa">
+            <a href="/guru/nilai">
                 <li href="#" class="nav-link t-white">
-                    <i class="bx bxs-happy-beaming"></i>
-                    <span class="mx-2">Data Siswa</span>
+                    <i class="bx bxs-group"></i>
+                    <span class="mx-2">Nilai</span>
                 </li>
 
             </a>
 
-            <a href="/admin/nilai">
-                <li href="#" class="nav-link t-white">
-                    <i class="bx bxs-book-bookmark"></i>
-                    <span class="mx-2">Data Nilai</span>
-                </li>
 
-            </a>
             <a href="/logout" class="mt-auto">
                 <li href="#" class="nav-link t-white">
                     <i class="bx bx-link-external"></i>
