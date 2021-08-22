@@ -9,7 +9,7 @@ Dashboard
 
         <div class="table-container">
 
-            <h5 class="mb-3">Permintaan peminjaman barang</h5>
+            {{-- <h5 class="mb-3">Permintaan peminjaman barang</h5>
 
                 <table class="table table-striped table-bordered ">
                     <thead>
@@ -47,7 +47,7 @@ Dashboard
 
                 </table>
 
-            </div>
+            </div> --}}
 
         <div class="table-container">
 
