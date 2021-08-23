@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\APINilaiController;
 use App\Http\Controllers\APIPaketController;
+use App\Http\Controllers\APIPesertaUjianController;
 use App\Http\Controllers\APIProfileSiswaController;
 use App\Http\Controllers\APISoalController;
 use App\Http\Controllers\AuthController;
@@ -29,8 +30,12 @@ Route::middleware('auth:api')->get(
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::group(['middleware' => ['auth:sanctum']],function () {
+Route::group(
+    ['middleware' => ['auth:sanctum']],
+    function () {
         Route::match(['post', 'get'], '/profile', [APIProfileSiswaController::class, 'index']);
+        Route::post('/profile/update-image', [APIProfileSiswaController::class, 'updateProfileImage']);
+
         Route::get('/paket-ongoing', [APIPaketController::class, 'ongoing']);
         Route::get('/paket-coming-soon', [APIPaketController::class, 'comingSoon']);
         Route::get('/paket/{id}', [APIPaketController::class, 'detailPaket']);
@@ -43,5 +48,8 @@ Route::group(['middleware' => ['auth:sanctum']],function () {
         Route::get('/nilai/{id}', [APINilaiController::class, 'index']);
 
         Route::get('/rangking/{id}', [APINilaiController::class, 'rangking']);
+
+        Route::get('/cek-peserta/{id}', [APIPesertaUjianController::class, 'index']);
+        Route::get('/cek-peserta/{id}/selesai', [APIPesertaUjianController::class, 'setSelesai']);
     }
 );

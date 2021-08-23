@@ -21,13 +21,16 @@ Dashboard
                         Gambar
                     </th>
                     <th>
-                        Nama Paket
-                    </th>
-                    <th>
                         Mata Pelajaran
                     </th>
                     <th>
+                        Guru
+                    </th>
+                    <th>
                         Waktu Pengerjaan
+                    </th>
+                    <th>
+                        Jumlah Soal
                     </th>
                     <th>
                         Tanggal Mulai
@@ -46,9 +49,10 @@ Dashboard
                     <tr>
                         <td>{{$key + 1}}</td>
                         <td><img src="{{$d->url_gambar}}" height="75px"></td>
-                        <td>{{$d->nama_paket}}</td>
                         <td>{{$d->mapel}}</td>
+                        <td>{{$d->getUser->getGuru ? $d->getUser->getGuru->nama : ''}}</td>
                         <td>{{$d->waktu_pengerjaan}}</td>
+                        <td>{{count($d->getSoal)}}</td>
                         <td>{{date('d F Y', strtotime($d->tanggal_mulai))}}</td>
                         <td>{{date('d F Y', strtotime($d->tanggal_selesai))}}</td>
                         <td><a class="btn btn-sm btn-success" data-id="{{$d->id}}" href="{{route('nilai_paket',['id' => $d->id])}}">Detail</a>

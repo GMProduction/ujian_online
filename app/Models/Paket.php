@@ -9,7 +9,6 @@ class Paket extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nama_paket',
         'mapel',
         'waktu_pengerjaan',
         'url_gambar',
@@ -29,6 +28,10 @@ class Paket extends Model
 
     public function getNilai(){
         return $this->hasMany(Nilai::class, 'id_paket')->orderBy('nilai','DESC')->groupBy('id_siswa')->select(['id_siswa','id_paket'])->selectRaw('sum(nilai) as nilai');
+    }
+
+    public function getUser(){
+        return $this->belongsTo(User::class, 'id_user');
     }
 
     public static function boot()

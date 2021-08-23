@@ -1,7 +1,5 @@
 @extends('guru.base')
-@section('title')
-    Dashboard
-@endsection
+
 @section('content')
 
     <section class="m-2">

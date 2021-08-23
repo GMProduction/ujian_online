@@ -59,6 +59,13 @@ return [
             'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
         ],
+
+        'imagesSiswa' => [
+            'driver' => 'local',
+            'root' => public_path() . '/images/siswa',
+            'url' => env('APP_URL') . '/storage',
+            'visibility' => 'public',
+        ],
     ],
 
     /*

@@ -9,6 +9,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Guru\NilaiGuruController;
 use App\Http\Controllers\Guru\ProfileGuruController;
 use App\Http\Controllers\Guru\SoalGuruController;
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\GuruMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 Route::get(
     '/',
     function () {
-        return view('welcome');
+        return redirect('/login');
     }
 );
 
@@ -38,7 +40,7 @@ Route::get(
 
 Route::post('/login',[AuthController::class,'loginAdmin']);
 Route::get('/logout',[AuthController::class,'logoutAdmin']);
-Route::prefix('/admin')->group(
+Route::prefix('/admin')->middleware(AdminMiddleware::class)->group(
     function () {
         Route::get('/', [DashboardController::class, 'index']);
         Route::post('/register', [AuthController::class, 'register']);
@@ -57,7 +59,7 @@ Route::prefix('/admin')->group(
     }
 );
 
-Route::prefix('/guru')->group(
+Route::prefix('/guru')->middleware(GuruMiddleware::class)->group(
     function () {
         Route::get('/', [\App\Http\Controllers\Guru\DashboardController::class, 'index']);
         Route::get('/profile', [ProfileGuruController::class, 'index']);

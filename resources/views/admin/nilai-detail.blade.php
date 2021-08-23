@@ -6,7 +6,6 @@
 
     <section class="m-2">
         <div class="container-fluid table-container">
-            <h5 class="fw-bold">{{$data->nama_paket}}</h5>
             <div class="row">
                 <div class="col-md-6 col-sm-12">
                     <div class="mb-3">

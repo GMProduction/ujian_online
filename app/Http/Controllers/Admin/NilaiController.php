@@ -17,7 +17,7 @@ class NilaiController extends Controller
     //
     public function index()
     {
-        $paket = Paket::paginate(10);
+        $paket = Paket::with(['getUser.getGuru','getSoal'])->paginate(10);
 
         return view('admin.nilai')->with(['data' => $paket]);
     }

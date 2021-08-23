@@ -1,7 +1,5 @@
 @extends('guru.base')
-@section('title')
-    Dashboard
-@endsection
+
 @section('css')
     <link rel="stylesheet" href="{{ asset('summernote/summernote.css') }}" type="text/css">
 @endsection
@@ -12,7 +10,7 @@
 
         <div class="table-container">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h5 class="mb-3">Paket Soal</h5>
+                <h5 class="mb-3">Mata Pelajaran</h5>
 
                 <a type="button ms-auto" class="btn btn-primary btn-sm" id="addData">Tambah Paket Soal
                 </a>
@@ -27,9 +25,6 @@
                     </th>
                     <th>
                         Gambar
-                    </th>
-                    <th>
-                        Nama Paket
                     </th>
                     <th>
                         Mata Pelajaran
@@ -54,7 +49,6 @@
                     <tr>
                         <td>{{$key + 1}}</td>
                         <td><img src="{{$d->url_gambar}}" height="75px"></td>
-                        <td>{{$d->nama_paket}}</td>
                         <td>{{$d->mapel}}</td>
                         <td>{{$d->waktu_pengerjaan}}</td>
                         <td>{{date('d F Y', strtotime($d->tanggal_mulai))}}</td>
@@ -89,10 +83,6 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="mb-3">
-                                        <label for="nama_paket" class="form-label">Nama Paket</label>
-                                        <input type="text" class="form-control" id="nama_paket" name="nama_paket">
-                                    </div>
-                                    <div class="mb-3">
                                         <label for="mapel" class="form-label">Mata Pelajaran</label>
                                         <input type="text" class="form-control" id="mapel" name="mapel">
                                     </div>
@@ -115,7 +105,7 @@
                                 <div class="col-6">
 
                                     <div class="mb-3">
-                                        <label for="kuotaEvent" class="form-label">Gambar Paket</label>
+                                        <label for="kuotaEvent" class="form-label">Gambar Cover</label>
                                         <input type="file" class="form-control" accept="image/*" id="url_gambar" name="url_gambar">
                                         <a class="d-block mt-2" id="imgGambar" style="cursor: pointer; width: 100%" target="_blank"
                                            href="">
@@ -161,7 +151,6 @@
         })
         $(document).on('click', '#addData', function () {
             $('#modal #id').val('');
-            $('#modal #nama_paket').val('');
             $('#modal #mapel').val('');
             $('#modal #waktu_pengerjaan').val('');
             $('#modal #tanggal_mulai').val('');
@@ -174,7 +163,6 @@
 
         $(document).on('click', '#editData', function () {
             $('#modal #id').val($(this).data('id'));
-            $('#modal #nama_paket').val($(this).data('nama'));
             $('#modal #mapel').val($(this).data('mapel'));
             $('#modal #waktu_pengerjaan').val($(this).data('waktu'));
             $('#modal #tanggal_mulai').val($(this).data('mulai'));
