@@ -18,7 +18,9 @@ class DashboardController extends Controller
     public function index()
     {
         $paket = Paket::where('id_user', '=', Auth::id())->limit(10)->get();
-        $nilai = Nilai::setNilai()->with(['getPaket', 'getUser.getSiswa'])->limit(10)->get();
+        $nilai = Nilai::setNilai()->with(['getPaket', 'getUser.getSiswa'])->whereHas('getPaket', function ($q) {
+            $q->where('id_user','=',Auth::id());
+        })->limit(10)->get();
 
         return view('guru.dashboard')->with(['paket' => $paket, 'nilai' => $nilai]);
     }

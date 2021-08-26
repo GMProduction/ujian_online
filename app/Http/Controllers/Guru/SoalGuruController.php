@@ -20,7 +20,6 @@ class SoalGuruController extends CustomController
         if ($this->request->isMethod('POST')) {
             $fild = $this->request->validate(
                 [
-                    'nama_paket'       => 'required',
                     'mapel'            => 'required',
                     'waktu_pengerjaan' => 'required',
                     'pengaturan'       => 'required',

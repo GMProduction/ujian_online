@@ -24,7 +24,7 @@
                         #
                     </th>
                     <th>
-                        Username
+                        NIS
                     </th>
                     <th>
                         Nama
@@ -87,8 +87,8 @@
                                         <input type="text" class="form-control" id="nama" name="nama">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="mapel" class="form-label">Username</label>
-                                        <input type="text" class="form-control" id="username" name="username">
+                                        <label for="mapel" class="form-label">NIS</label>
+                                        <input type="number" class="form-control" id="username" name="username">
                                     </div>
                                     <div class="mb-3">
                                         <label for="waktu_pengerjaan" class="form-label">Password</label>

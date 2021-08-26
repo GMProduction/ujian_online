@@ -21,7 +21,7 @@
                             <input type="text" class="form-control" id="nama" name="nama" value="{{$data->getGuru->nama}}" required>
                         </div>
                         <div class="mb-3">
-                            <label for="mapel" class="form-label">Username</label>
+                            <label for="mapel" class="form-label">NIP</label>
                             <input type="text" class="form-control" id="username" name="username" value="{{$data->username}}" required>
                         </div>
                         <div class="mb-3">

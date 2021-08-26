@@ -44,13 +44,6 @@
                 </li>
             </a>
 
-            <a href="/admin/paket-soal">
-                <li href="#" class="nav-link t-white">
-                    <i class="bx bxs-cube"></i>
-                    <span class="mx-2">Master Soal</span>
-                </li>
-            </a>
-
 
             <a href="/admin/guru">
                 <li href="#" class="nav-link t-white">
@@ -94,7 +87,7 @@
         <!-- Top Nav -->
         <nav class="navbar top-navbar navbar-light b-white px-5 " style="z-index: 10">
             <a class="btn border-0" id="menu-btn"><i class="bx bx-menu"></i></a>
-            <a>@yield('title')</a>
+            <a class="d-none">@yield('title')</a>
         </nav>
         <!--End Top Nav -->
         <div class="content-wrapper bg-light p-2" style="height: 100vh;">

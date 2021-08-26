@@ -28,4 +28,45 @@ class APIProfileSiswaController extends CustomController
         }
         return $this->jsonResponse($user,200);
     }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateProfileImage()
+    {
+        try {
+            $image  = $this->request->files->get('image');
+            $data   = User::find(Auth::id());
+            $string = null;
+
+            if ($image || $image != '') {
+                if ($data && $data->getSiswa->image) {
+                    if (file_exists('../public'.$data->getSiswa->image)) {
+                        unlink('../public'.$data->getSiswa->image);
+                    }
+
+                }
+
+                $textImg = $this->generateImageName('image');
+                $string = '/images/siswa/'.$textImg;
+                $this->uploadImage('image', $textImg, 'imagesSiswa');
+                $data->getSiswa->update(
+                    [
+                        'image' => $string,
+                    ]
+                );
+            } else {
+                if ($data && $data->getSiswa->image) {
+                    $string = $data->getSiswa->image;
+                }
+            }
+
+            return $this->jsonResponse(['msg' => 'Berhasil memperbarui foto', 'data' => $string]);
+
+        } catch (\Exception $err) {
+            return $this->jsonResponse(['msg' => $err->getMessage()], 500);
+        }
+    }
+
+
 }

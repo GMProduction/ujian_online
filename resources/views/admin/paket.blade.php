@@ -29,9 +29,6 @@
                         Gambar
                     </th>
                     <th>
-                        Nama Paket
-                    </th>
-                    <th>
                         Mata Pelajaran
                     </th>
                     <th>
@@ -54,7 +51,6 @@
                     <tr>
                         <td>{{$key + 1}}</td>
                         <td><img src="{{$d->url_gambar}}" height="75px"></td>
-                        <td>{{$d->nama_paket}}</td>
                         <td>{{$d->mapel}}</td>
                         <td>{{$d->waktu_pengerjaan}}</td>
                         <td>{{date('d F Y', strtotime($d->tanggal_mulai))}}</td>
@@ -91,10 +87,6 @@
                             <input id="id" name="id" hidden>
                             <div class="row">
                                 <div class="col-6">
-                                    <div class="mb-3">
-                                        <label for="nama_paket" class="form-label">Nama Paket</label>
-                                        <input type="text" class="form-control" id="nama_paket" name="nama_paket">
-                                    </div>
                                     <div class="mb-3">
                                         <label for="mapel" class="form-label">Mata Pelajaran</label>
                                         <input type="text" class="form-control" id="mapel" name="mapel">
@@ -164,7 +156,6 @@
         })
         $(document).on('click', '#addData', function () {
             $('#modal #id').val('');
-            $('#modal #nama_paket').val('');
             $('#modal #mapel').val('');
             $('#modal #waktu_pengerjaan').val('');
             $('#modal #tanggal_mulai').val('');
@@ -177,7 +168,6 @@
 
         $(document).on('click', '#editData', function () {
             $('#modal #id').val($(this).data('id'));
-            $('#modal #nama_paket').val($(this).data('nama'));
             $('#modal #mapel').val($(this).data('mapel'));
             $('#modal #waktu_pengerjaan').val($(this).data('waktu'));
             $('#modal #tanggal_mulai').val($(this).data('mulai'));
