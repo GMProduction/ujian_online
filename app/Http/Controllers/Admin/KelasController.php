@@ -12,6 +12,7 @@ class KelasController extends Controller
 
     public function getKelas(){
         $kelas = Kelas::all();
+        return $kelas;
     }
     public function index(){
         if (\request()->isMethod('POST')){
