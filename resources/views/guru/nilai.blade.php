@@ -47,7 +47,7 @@ Dashboard
                         <td>{{$key + 1}}</td>
                         <td><img src="{{$d->url_gambar}}" height="75px"></td>
                         <td>{{$d->mapel}}</td>
-                        <td>{{$d->getKelas->nama}}</td>
+                        <td>{{$d->getKelas ? $d->getKelas->nama : ''}}</td>
                         <td>{{$d->waktu_pengerjaan}}</td>
                         <td>{{date('d F Y', strtotime($d->tanggal_mulai))}}</td>
                         <td>{{date('d F Y', strtotime($d->tanggal_selesai))}}</td>

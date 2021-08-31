@@ -93,7 +93,7 @@
                     <tr>
                         <td>{{ $key + 1}}</td>
                         <td>{{$d->getUser->getSiswa->nama}}</td>
-                        <td>{{$d->getUser->getSiswa->getKelas->nama}}</td>
+                        <td>{{$d->getUser->getSiswa->getKelas ? $d->getUser->getSiswa->getKelas->nama : ''}}</td>
                         <td>{{$d->benar}}</td>
                         <td>{{$d->salah}}</td>
                         <td>{{$d->tidak_dikerjakan}}</td>
