@@ -24,6 +24,9 @@ Dashboard
                         Mata Pelajaran
                     </th>
                     <th>
+                        Kelas
+                    </th>
+                    <th>
                         Guru
                     </th>
                     <th>
@@ -50,6 +53,7 @@ Dashboard
                         <td>{{$key + 1}}</td>
                         <td><img src="{{$d->url_gambar}}" height="75px"></td>
                         <td>{{$d->mapel}}</td>
+                        <td>{{$d->getKelas->nama}}</td>
                         <td>{{$d->getUser->getGuru ? $d->getUser->getGuru->nama : ''}}</td>
                         <td>{{$d->waktu_pengerjaan}}</td>
                         <td>{{count($d->getSoal)}}</td>

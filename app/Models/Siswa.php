@@ -17,4 +17,10 @@ class Siswa extends Model
         'kelas',
         'image'
     ];
+
+    protected $with = 'getKelas';
+
+    public function getKelas(){
+        return $this->belongsTo(Kelas::class, 'kelas');
+    }
 }

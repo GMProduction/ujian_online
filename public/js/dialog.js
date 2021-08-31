@@ -26,6 +26,8 @@ function saveData(title, form, url) {
                         if (xhr.status === 200) {
                             swal("Data Updated ", {
                                 icon: "success",
+                                buttons: false,
+                                timer: 1000
                             }).then((dat) => {
                                 window.location.reload();
                             });

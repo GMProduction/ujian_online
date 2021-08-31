@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GuruController;
+use App\Http\Controllers\Admin\KelasController;
 use App\Http\Controllers\Admin\NilaiController;
 use App\Http\Controllers\Admin\SiswaController;
 use App\Http\Controllers\Admin\SoalController;
@@ -38,13 +39,14 @@ Route::get(
     }
 );
 
-Route::post('/login',[AuthController::class,'loginAdmin']);
-Route::get('/logout',[AuthController::class,'logoutAdmin']);
+Route::post('/login', [AuthController::class, 'loginAdmin']);
+Route::get('/logout', [AuthController::class, 'logoutAdmin']);
 Route::prefix('/admin')->middleware(AdminMiddleware::class)->group(
     function () {
         Route::get('/', [DashboardController::class, 'index']);
         Route::post('/register', [AuthController::class, 'register']);
-
+        Route::match(['post', 'get'], '/kelas', [KelasController::class, 'index']);
+        Route::get('/kelas/all',[KelasController::class,'getKelas']);
         Route::match(['post', 'get'], '/paket-soal', [SoalController::class, 'paketAll'])->name('paket');
         Route::get('/paket-soal/{id}', [SoalController::class, 'paketSoal'])->name('paket_soal');
         Route::match(['post', 'get'], '/paket-soal/{id}/soal', [SoalController::class, 'soal'])->name('detail_soal');
