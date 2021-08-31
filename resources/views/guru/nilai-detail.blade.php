@@ -20,7 +20,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Nama Mapel</label>
-                        <p class="fw-bold" id="mapel">{{$data->mapel}}</p>
+                        <p class="fw-bold" id="mapel">{{$data->mapel}} ( {{$data->getKelas ? $data->getKelas->nama : ''}} )</p>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Pembuat Soal</label>
@@ -92,7 +92,7 @@
                     <tr>
                         <td>{{ $key + 1}}</td>
                         <td>{{$d->getUser->getSiswa->nama}}</td>
-                        <td>{{$d->getUser->getSiswa->kelas}}</td>
+                        <td>{{$d->getUser->getSiswa->getKelas->nama}}</td>
                         <td>{{$d->benar}}</td>
                         <td>{{$d->salah}}</td>
                         <td>{{$d->tidak_dikerjakan}}</td>

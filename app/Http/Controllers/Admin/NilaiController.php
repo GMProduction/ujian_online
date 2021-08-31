@@ -17,7 +17,7 @@ class NilaiController extends Controller
     //
     public function index()
     {
-        $paket = Paket::with(['getUser.getGuru','getSoal'])->paginate(10);
+        $paket = Paket::with(['getUser.getGuru','getSoal','getKelas'])->paginate(10);
 
         return view('admin.nilai')->with(['data' => $paket]);
     }
@@ -25,7 +25,7 @@ class NilaiController extends Controller
     public function detail($id)
     {
 //        $nilai = Nilai::with('getUser.getSiswa')->orderBy('nilai','DESC')->where('id_paket','=',$id)->groupBy('id_siswa')->select('id_siswa')->selectRaw('sum(nilai) as nilai')->get();
-        $nilai     = Paket::find($id);
+        $nilai     = Paket::with('getKelas')->find($id);
         $getNilai = $nilai->getNilai()->with('getUser.getSiswa')->paginate(10);
         $totalSoal       = Soal::where('id_paket', '=', $id)->count('*');
         $nilai = Arr::add($nilai, 'soal', $totalSoal);
@@ -55,7 +55,6 @@ class NilaiController extends Controller
                 $nilai       = Arr::add($nilai, 'pembuat_soal', $pembuatSoal);
             }
         }
-//        return $nilai;
         return view('admin.nilai-detail')->with(['data' => $nilai]);
     }
 }

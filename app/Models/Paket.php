@@ -16,6 +16,7 @@ class Paket extends Model
         'id_user',
         'tanggal_mulai',
         'tanggal_selesai',
+        'id_kelas'
     ];
 
     public function getSoal(){
@@ -32,6 +33,10 @@ class Paket extends Model
 
     public function getUser(){
         return $this->belongsTo(User::class, 'id_user');
+    }
+
+    public function getKelas(){
+        return $this->belongsTo(Kelas::class,'id_kelas');
     }
 
     public static function boot()

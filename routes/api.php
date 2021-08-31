@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\APIKelasController;
 use App\Http\Controllers\APINilaiController;
 use App\Http\Controllers\APIPaketController;
 use App\Http\Controllers\APIPesertaUjianController;
@@ -29,6 +30,8 @@ Route::middleware('auth:api')->get(
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
+Route::get('/kelas',[APIKelasController::class,'index']);
 
 Route::group(
     ['middleware' => ['auth:sanctum']],

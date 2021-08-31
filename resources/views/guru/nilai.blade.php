@@ -21,10 +21,10 @@ Dashboard
                         Gambar
                     </th>
                     <th>
-                        Nama Paket
+                        Mata Pelajaran
                     </th>
                     <th>
-                        Mata Pelajaran
+                        Kelas
                     </th>
                     <th>
                         Waktu Pengerjaan
@@ -46,8 +46,8 @@ Dashboard
                     <tr>
                         <td>{{$key + 1}}</td>
                         <td><img src="{{$d->url_gambar}}" height="75px"></td>
-                        <td>{{$d->nama_paket}}</td>
                         <td>{{$d->mapel}}</td>
+                        <td>{{$d->getKelas->nama}}</td>
                         <td>{{$d->waktu_pengerjaan}}</td>
                         <td>{{date('d F Y', strtotime($d->tanggal_mulai))}}</td>
                         <td>{{date('d F Y', strtotime($d->tanggal_selesai))}}</td>

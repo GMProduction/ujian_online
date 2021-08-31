@@ -45,6 +45,14 @@
             </a>
 
 
+            <a href="/admin/kelas">
+                <li href="#" class="nav-link t-white">
+                    <i class="bx bxs-group"></i>
+                    <span class="mx-2">Data Kelas</span>
+                </li>
+
+            </a>
+
             <a href="/admin/guru">
                 <li href="#" class="nav-link t-white">
                     <i class="bx bxs-group"></i>

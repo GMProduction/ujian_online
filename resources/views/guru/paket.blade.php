@@ -30,6 +30,9 @@
                         Mata Pelajaran
                     </th>
                     <th>
+                        Kelas
+                    </th>
+                    <th>
                         Waktu Pengerjaan
                     </th>
                     <th>
@@ -50,11 +53,12 @@
                         <td>{{$key + 1}}</td>
                         <td><img src="{{$d->url_gambar}}" height="75px"></td>
                         <td>{{$d->mapel}}</td>
+                        <td>{{$d->getkelas->nama ?? ''}}</td>
                         <td>{{$d->waktu_pengerjaan}}</td>
                         <td>{{date('d F Y', strtotime($d->tanggal_mulai))}}</td>
                         <td>{{date('d F Y', strtotime($d->tanggal_selesai))}}</td>
                         <td><a class="btn btn-sm btn-success" data-id="{{$d->id}}" href="{{route('paket_soal_guru',['id' => $d->id])}}">Detail</a>
-                            <a class="btn btn-sm btn-primary" data-id="{{$d->id}}" data-nama="{{$d->nama_paket}}" data-mapel="{{$d->mapel}}" data-waktu="{{$d->waktu_pengerjaan}}"
+                            <a class="btn btn-sm btn-primary" data-id="{{$d->id}}" data-kelas="{{$d->id_kelas}}" data-nama="{{$d->nama_paket}}" data-mapel="{{$d->mapel}}" data-waktu="{{$d->waktu_pengerjaan}}"
                                data-mulai="{{$d->tanggal_mulai}}" data-selesai="{{$d->tanggal_selesai}}" data-img="{{$d->url_gambar}}" data-pengaturan="{{$d->pengaturan}}" id="editData">Edit</a>
                             <a class="btn btn-sm btn-danger" id="deleteData" data-nama="{{$d->nama_paket}}" data-id="{{$d->id}}" >Delete</a></td>
                     </tr>
@@ -85,6 +89,15 @@
                                     <div class="mb-3">
                                         <label for="mapel" class="form-label">Mata Pelajaran</label>
                                         <input type="text" class="form-control" id="mapel" name="mapel">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="tanggal_selesai" class="form-label">Kelas</label>
+                                        <select class="form-control" id="id_kelas" name="id_kelas" required>
+                                            <option value="">Pilih Kelas</option>
+                                            @foreach($kelas as $k)
+                                                <option value="{{$k->id}}">{{$k->nama}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="mb-3">
                                         <label for="waktu_pengerjaan" class="form-label">Waktu Pengerjaan</label>
@@ -152,6 +165,7 @@
         $(document).on('click', '#addData', function () {
             $('#modal #id').val('');
             $('#modal #mapel').val('');
+            $('#modal #id_kelas').val('');
             $('#modal #waktu_pengerjaan').val('');
             $('#modal #tanggal_mulai').val('');
             $('#modal #tanggal_selesai').val('');
@@ -164,6 +178,7 @@
         $(document).on('click', '#editData', function () {
             $('#modal #id').val($(this).data('id'));
             $('#modal #mapel').val($(this).data('mapel'));
+            $('#modal #id_kelas').val($(this).data('kelas'));
             $('#modal #waktu_pengerjaan').val($(this).data('waktu'));
             $('#modal #tanggal_mulai').val($(this).data('mulai'));
             $('#modal #tanggal_selesai').val($(this).data('selesai'));
@@ -184,7 +199,6 @@
             saveData('Data Paket', 'form', '/guru/paket-soal');
             return false;
         }
-
         $(document).on('click','#deleteData', function () {
             var nama = $(this).data('nama');
             var id = $(this).data('id');

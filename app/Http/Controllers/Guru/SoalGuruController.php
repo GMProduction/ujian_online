@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Guru;
 use App\Helper\CustomController;
 use App\Http\Controllers\Controller;
 use App\Models\Jawaban;
+use App\Models\Kelas;
 use App\Models\Paket;
 use App\Models\Soal;
 use Illuminate\Http\Request;
@@ -25,20 +26,24 @@ class SoalGuruController extends CustomController
                     'pengaturan'       => 'required',
                     'tanggal_mulai'    => 'required',
                     'tanggal_selesai'  => 'required',
+
                 ]
             );
-            $img = $this->request->files->get('url_gambar');
+            $img  = $this->request->files->get('url_gambar');
 
-            if ($img || $img != ''){
-                $image = $this->generateImageName('url_gambar');
+            if ($img || $img != '') {
+                $image     = $this->generateImageName('url_gambar');
                 $stringImg = '/images/paket/'.$image;
                 $this->uploadImage('url_gambar', $image, 'imagePaket');
                 $fild = Arr::add($fild, 'url_gambar', $stringImg);
             }
-            $fild = Arr::add($fild, 'id_user', Auth::id());
+            Arr::set($fild, 'id_user', Auth::id());
+            Arr::set($fild, 'id_kelas', (int)$this->request->get('id_kelas'));
+
+
             if ($this->request->get('id')) {
                 $paket = Paket::find($this->request->get('id'));
-                if ($img && $paket->url_gambar){
+                if ($img && $paket->url_gambar) {
                     if (file_exists('../public'.$paket->url_gambar)) {
                         unlink('../public'.$paket->url_gambar);
                     }
@@ -47,21 +52,32 @@ class SoalGuruController extends CustomController
             } else {
                 Paket::create($fild);
             }
-            return response()->json([
-                'msg' => 'berhasil'
-            ],200);
+
+            return response()->json(
+                [
+                    'msg' => 'berhasil',
+                ],
+                200
+            );
         }
-        $paket = Paket::where('id_user','=',Auth::id())->paginate(10);
+        $paket = Paket::with('getKelas')->where('id_user', '=', Auth::id())->paginate(10);
+        $kelas = Kelas::all();
+        $data  = [
+            'data'  => $paket,
+            'kelas' => $kelas,
+        ];
+
 //return $paket;
-        return view('guru.paket')->with(['data' => $paket]);
+        return view('guru.paket')->with($data);
     }
 
     public function paketSoal($id)
     {
         $paket = Paket::find($id);
-        $soal = $paket->getSoal()->paginate(10);
+        $soal  = $paket->getSoal()->paginate(10);
 
-        $paket = Arr::add($paket,'soal',$soal);
+        $paket = Arr::add($paket, 'soal', $soal);
+
         return view('guru.paket-soal')->with(['data' => $paket]);
     }
 
@@ -119,13 +135,17 @@ class SoalGuruController extends CustomController
         return $paket;
     }
 
-    public function deletePaket($id){
+    public function deletePaket($id)
+    {
         Paket::destroy($id);
+
         return $this->jsonResponse('berhasil', 200);
     }
 
-    public function deteleSoal($id){
+    public function deteleSoal($id)
+    {
         Soal::destroy($id);
+
         return $this->jsonResponse('berhasil', 200);
     }
 }

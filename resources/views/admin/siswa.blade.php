@@ -49,11 +49,12 @@
                     <tr>
                         <td>{{$key + 1}}</td>
                         <td>{{$d->username}}</td>
-                        <td>{{$d->getSiswa->nama}}</td>
-                        <td>{{$d->getSiswa->kelas}}</td>
-                        <td>{{$d->getSiswa->alamat}}</td>
-                        <td>{{$d->getSiswa->no_hp}}</td>
-                        <td style="width: 150px"><a class="btn btn-sm btn-primary" id="editData" data-kelas="{{$d->getSiswa->kelas}}" data-username="{{$d->username}}" data-hp="{{$d->getSiswa->no_hp}}" data-id="{{$d->id}}" data-nama="{{$d->getSiswa->nama}}" data-alamat="{{$d->getSiswa->alamat}}">Edit</a>
+                        <td>{{$d->getSiswa->nama ?? ''}}</td>
+                        <td>{{$d->getSiswa->getKelas ? $d->getSiswa->getKelas->nama : ''}}</td>
+                        <td>{{$d->getSiswa->alamat ?? ''}}</td>
+                        <td>{{$d->getSiswa->no_hp ?? ''}}</td>
+                        <td style="width: 150px"><a class="btn btn-sm btn-primary" id="editData" data-kelas="{{$d->getSiswa->kelas ?? ''}}" data-username="{{$d->username}}"
+                                                    data-hp="{{$d->getSiswa->no_hp ?? ''}}" data-id="{{$d->id}}" data-nama="{{$d->getSiswa->nama ?? ''}}" data-alamat="{{$d->getSiswa->alamat ?? ''}}">Edit</a>
                             <a class="btn btn-sm btn-danger">Delete</a></td>
                     </tr>
                 @empty
@@ -100,7 +101,12 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="tanggal_selesai" class="form-label">Kelas</label>
-                                        <input type="text" class="form-control" id="kelas" name="kelas">
+                                        <select class="form-control" id="kelas" name="kelas" required>
+                                            <option value="">Pilih Kelas</option>
+                                            @foreach($kelas as $k)
+                                                <option value="{{$k->id}}">{{$k->nama}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="mb-3">
                                         <label for="tanggal_selesai" class="form-label">No. Hp</label>
@@ -146,14 +152,14 @@
         function save() {
             var id = $('#modal #id').val();
             var string = 'Tambah';
-            if (id){
+            if (id) {
                 string = 'Edit';
             }
-            saveData(string+' Data', 'form', '/admin/register');
+            saveData(string + ' Data', 'form', '/admin/register');
             return false;
         }
 
-        $(document).on('click','#editData', function () {
+        $(document).on('click', '#editData', function () {
             $('#modal #id').val($(this).data('id'))
             $('#modal #nama').val($(this).data('nama'))
             $('#modal #alamat').val($(this).data('alamat'))
