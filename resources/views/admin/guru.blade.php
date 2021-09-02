@@ -46,11 +46,11 @@
                     <tr>
                         <td>{{$key + 1}}</td>
                         <td>{{$d->username}}</td>
-                        <td>{{$d->getGuru->nama}}</td>
-                        <td>{{$d->getGuru->alamat}}</td>
-                        <td>{{$d->getGuru->no_hp}}</td>
-                        <td style="width: 150px"><a class="btn btn-sm btn-primary" id="editData" data-username="{{$d->username}}" data-hp="{{$d->getGuru->no_hp}}" data-id="{{$d->id}}" data-nama="{{$d->getGuru->nama}}" data-alamat="{{$d->getGuru->alamat}}">Edit</a>
-                            <a class="btn btn-sm btn-danger">Delete</a></td>
+                        <td>{{$d->getGuru ? $d->getGuru->nama : ''}}</td>
+                        <td>{{$d->getGuru ? $d->getGuru->alamat : ''}}</td>
+                        <td>{{$d->getGuru ? $d->getGuru->no_hp : ''}}</td>
+                        <td style="width: 150px"><a class="btn btn-sm btn-primary" id="editData" data-username="{{$d->username}}" data-hp="{{$d->getGuru ? $d->getGuru->no_hp : ''}}" data-id="{{$d->id}}" data-nama="{{$d->getGuru ? $d->getGuru->nama : ''}}" data-alamat="{{$d->getGuru ? $d->getGuru->alamat : ''}}">Edit</a>
+                            <a class="btn btn-sm btn-danger" id="deleteData"  data-id="{{$d->id}}" data-nama="{{$d->getGuru ? $d->getGuru->nama : ''}}" >Delete</a></td>
                     </tr>
                 @empty
                     <tr>
@@ -154,6 +154,11 @@
             $('#modal #password').val('*********')
             $('#modal #password_confirmation').val('*********')
             $('#modal').modal('show');
+        })
+
+        $(document).on('click', '#deleteData', function () {
+            deleteData($(this).data('nama'), window.location.pathname+'/'+$(this).data('id')+'/delete');
+            return false;
         })
     </script>
 

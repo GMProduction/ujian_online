@@ -29,4 +29,9 @@ class KelasController extends Controller
         $kelas = $this->getKelas();
         return view('admin.kelas')->with(['data' => $kelas]);
     }
+
+    public function delete($id){
+            Kelas::destroy($id);
+            return response()->json(['msg' => 'success']);
+    }
 }

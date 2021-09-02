@@ -38,7 +38,7 @@
                         <td>{{$key + 1}}</td>
                         <td>{{$d->nama}}</td>
                         <td style="width: 150px"><a class="btn btn-sm btn-primary" id="editData" data-id="{{$d->id}}" data-nama="{{$d->nama}}">Edit</a>
-                            <a class="btn btn-sm btn-danger">Delete</a></td>
+                            <a class="btn btn-sm btn-danger" id="deleteData" data-id="{{$d->id}}" data-nama="{{$d->nama}}">Delete</a></td>
                     </tr>
                 @empty
                     <tr>
@@ -109,6 +109,11 @@
             $('#modal #nama').val($(this).data('nama'));
 
             $('#modal').modal('show');
+        })
+
+        $(document).on('click', '#deleteData', function () {
+            deleteData($(this).data('nama'), window.location.pathname+'/'+$(this).data('id')+'/delete');
+            return false;
         })
     </script>
 

@@ -55,7 +55,7 @@
                         <td>{{$d->getSiswa->no_hp ?? ''}}</td>
                         <td style="width: 150px"><a class="btn btn-sm btn-primary" id="editData" data-kelas="{{$d->getSiswa->kelas ?? ''}}" data-username="{{$d->username}}"
                                                     data-hp="{{$d->getSiswa->no_hp ?? ''}}" data-id="{{$d->id}}" data-nama="{{$d->getSiswa->nama ?? ''}}" data-alamat="{{$d->getSiswa->alamat ?? ''}}">Edit</a>
-                            <a class="btn btn-sm btn-danger">Delete</a></td>
+                            <a class="btn btn-sm btn-danger" id="deleteData"  data-id="{{$d->id}}" data-nama="{{$d->getSiswa->nama ?? ''}}" >Delete</a></td>
                     </tr>
                 @empty
                     <tr>
@@ -169,6 +169,11 @@
             $('#modal #password').val('*********')
             $('#modal #password_confirmation').val('*********')
             $('#modal').modal('show');
+        })
+
+        $(document).on('click', '#deleteData', function () {
+            deleteData($(this).data('nama'), window.location.pathname+'/'+$(this).data('id')+'/delete');
+            return false;
         })
     </script>
 

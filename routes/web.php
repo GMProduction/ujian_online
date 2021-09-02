@@ -46,6 +46,7 @@ Route::prefix('/admin')->middleware(AdminMiddleware::class)->group(
         Route::get('/', [DashboardController::class, 'index']);
         Route::post('/register', [AuthController::class, 'register']);
         Route::match(['post', 'get'], '/kelas', [KelasController::class, 'index']);
+        Route::get( '/kelas/{id}/delete', [KelasController::class, 'delete']);
         Route::get('/kelas/all',[KelasController::class,'getKelas']);
         Route::match(['post', 'get'], '/paket-soal', [SoalController::class, 'paketAll'])->name('paket');
         Route::get('/paket-soal/{id}', [SoalController::class, 'paketSoal'])->name('paket_soal');
@@ -55,7 +56,9 @@ Route::prefix('/admin')->middleware(AdminMiddleware::class)->group(
         Route::get('/paket-soal/soal/delete/{id}', [SoalController::class, 'soal'])->name('detail_soal_guru');
 
         Route::get('/guru', [GuruController::class, 'index']);
+        Route::get('/guru/{id}/delete', [GuruController::class, 'delete']);
         Route::get('/siswa', [SiswaController::class, 'index']);
+        Route::get('/siswa/{id}/delete', [SiswaController::class, 'delete']);
         Route::get('/nilai', [NilaiController::class, 'index']);
         Route::get('/nilai/{id}', [NilaiController::class, 'detail'])->name('nilai_paket');
     }

@@ -46,7 +46,8 @@ function saveData(title, form, url) {
                         console.log(xhr.status);
                         console.log(textStatus);
                         console.log(error.responseJSON);
-                        swal(error.responseJSON.errors[Object.keys(error.responseJSON.errors)[0]][0])
+                        swal(error.responseJSON['message'] ? error.responseJSON['message'] : error.responseJSON.errors ? error.responseJSON.errors[Object.keys(error.responseJSON.errors)[0]][0] : error.responseJSON['msg'] )
+
                     }
                 })
             }
@@ -102,7 +103,8 @@ console.log(url);
                         console.log(xhr.status);
                         console.log(textStatus);
                         console.log(error.responseJSON);
-                        swal(error.responseJSON.errors[Object.keys(error.responseJSON.errors)[0]][0])
+                        swal(error.responseJSON['message'] ? error.responseJSON['message'] : error.responseJSON.errors ? error.responseJSON.errors[Object.keys(error.responseJSON.errors)[0]][0] : error.responseJSON['msg'] )
+
                     }
                 })
             }
