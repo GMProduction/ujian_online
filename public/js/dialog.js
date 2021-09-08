@@ -98,6 +98,7 @@ console.log(url);
                         console.log(textStatus);
                     },
                     error: function (error, xhr, textStatus) {
+
                         // console.log("LOG ERROR", error.responseJSON.errors);
                         // console.log("LOG ERROR", error.responseJSON.errors[Object.keys(error.responseJSON.errors)[0]][0]);
                         console.log(xhr.status);
